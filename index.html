@@ -29,6 +29,8 @@
   .elegido { font-size:14px; color:var(--verde); margin-top:6px; min-height:1.2em; word-break:break-word; }
   button { width:100%; margin-top:22px; padding:14px; font:inherit; font-weight:700; color:#fff; background:var(--verde); border:0; border-radius:10px; cursor:pointer; }
   button:disabled { opacity:.55; cursor:wait; }
+  .paso-previo { margin-top:16px; padding:12px 14px; border:1px solid var(--borde); border-left:4px solid var(--verde); border-radius:8px; }
+  button.secundario { margin-top:0; background:transparent; color:var(--verde); border:2px solid var(--verde); }
   .error { background:var(--error-bg); color:var(--error); border-radius:8px; padding:10px 12px; margin-top:16px; font-size:15px; }
   .exito { background:var(--ok-bg); border-radius:10px; padding:16px; }
   .privacidad { margin-top:18px; padding:12px 14px; border-radius:8px; background:var(--fondo); font-size:14px; color:var(--suave); }
@@ -48,17 +50,23 @@
 
   <form class="tarjeta" id="formulario" hidden novalidate>
     <h1>Envía tus documentos</h1>
-    <p>Para continuar con tu postulación a AMAGRO AG necesitamos dos documentos. Puedes subir un PDF o una foto tomada con el celular.</p>
+    <p>Para continuar con tu postulación a AMAGRO AG necesitamos tu carta de solicitud firmada y una copia de tu carnet. Puedes subir un PDF o una foto tomada con el celular.</p>
+
+    <div class="paso-previo" id="bloqueCarta" hidden>
+      <b>Primero, tu carta de solicitud</b>
+      <p class="ayuda" style="margin:2px 0 8px">Ya viene con tus datos completados. Descárgala, imprímela, fírmala y súbela más abajo.</p>
+      <button type="button" id="descargarCarta" class="secundario">⬇ Descargar mi carta (PDF)</button>
+    </div>
 
     <fieldset>
-      <label class="titulo" for="carta">1. Carta de solicitud firmada</label>
-      <p class="ayuda">La carta que te enviamos, impresa y firmada por ti.</p>
+      <label class="titulo" for="carta">Carta de solicitud firmada</label>
+      <p class="ayuda">La carta impresa y firmada por ti (puede ser una foto o un escaneo).</p>
       <input type="file" id="carta" accept="application/pdf,image/*">
       <div class="elegido" id="cartaElegido" aria-live="polite"></div>
     </fieldset>
 
     <fieldset>
-      <label class="titulo" for="carnet">2. Copia de tu carnet de identidad</label>
+      <label class="titulo" for="carnet">Copia de tu carnet de identidad</label>
       <p class="ayuda">Por ambos lados, en una sola imagen o PDF, con el texto bien legible.</p>
       <input type="file" id="carnet" accept="application/pdf,image/*">
       <div class="elegido" id="carnetElegido" aria-live="polite"></div>

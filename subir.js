@@ -18,7 +18,7 @@
     } catch { return { ok: false, estado: 0, error: 'No pudimos conectarnos. Revisa tu conexión a internet e inténtalo de nuevo.' }; }
     let datos = null;
     try { datos = await r.json(); } catch { /* sin cuerpo */ }
-    return { ok: r.ok, estado: r.status, error: datos && datos.error };
+    return { ok: r.ok, estado: r.status, error: datos && datos.error, datos };
   }
 
   // PDF: se envía tal cual. Imagen: se reduce y se guarda como JPG para que quepa en el límite y se suba rápido.
@@ -88,10 +88,29 @@
     }
   });
 
+  // La carta ya completada se pide al servidor con el mismo enlace y se descarga como archivo.
+  $('descargarCarta').addEventListener('click', async () => {
+    error('');
+    $('descargarCarta').disabled = true;
+    try {
+      const r = await fetch(CFG.funcion, { method: 'POST', headers: { apikey: CFG.clave, 'Content-Type': 'application/json' }, body: JSON.stringify({ accion: 'carta', token }) });
+      if (!r.ok) {
+        let m = null; try { m = (await r.json()).error; } catch { /* sin cuerpo */ }
+        return error(m || 'No pudimos descargar tu carta. Inténtalo de nuevo.');
+      }
+      const url = URL.createObjectURL(await r.blob());
+      const a = document.createElement('a');
+      a.href = url; a.download = 'carta-de-solicitud-AMAGRO.pdf';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch { error('No pudimos conectarnos. Revisa tu conexión a internet e inténtalo de nuevo.'); }
+    finally { $('descargarCarta').disabled = false; }
+  });
+
   (async () => {
     if (!token) return invalido();
     const r = await llamar({ accion: 'validar', token }, true);
-    if (r.ok) return mostrar('formulario');
+    if (r.ok) { $('bloqueCarta').hidden = !(r.datos && r.datos.carta); return mostrar('formulario'); }
     if (r.estado === 404) return invalido(r.error);
     invalido(r.error || 'No pudimos comprobar tu enlace. Inténtalo de nuevo en unos minutos.');
   })();
