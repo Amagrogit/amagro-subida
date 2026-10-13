@@ -28,6 +28,11 @@
   input:focus, select:focus { outline:2px solid var(--verde); outline-offset:1px; }
   button { width:100%; margin-top:22px; padding:14px; font:inherit; font-weight:700; color:#fff; background:var(--verde); border:0; border-radius:10px; cursor:pointer; }
   button:disabled { opacity:.55; cursor:wait; }
+  .msg { font-size:14px; margin-top:4px; min-height:1.3em; }
+  .msg.mal { color:var(--error); font-weight:600; }
+  .msg.bien { color:var(--verde); }
+  .msg.pista { color:var(--suave); }
+  input[aria-invalid="true"], select[aria-invalid="true"] { border-color:var(--error); border-width:2px; }
   .error { background:var(--error-bg); color:var(--error); border-radius:8px; padding:10px 12px; margin-top:16px; font-size:15px; }
   .exito { background:var(--ok-bg); border-radius:10px; padding:16px; }
   .privacidad { margin-top:18px; padding:12px 14px; border-radius:8px; background:var(--fondo); font-size:14px; color:var(--suave); }
@@ -47,7 +52,7 @@
 
   <form class="tarjeta" id="formulario" hidden novalidate>
     <h1>Confirma tus datos</h1>
-    <p>Al revisar tu postulación a AMAGRO AG, estos datos necesitan una corrección. Escribe cómo deben quedar; el equipo los revisará antes de actualizar tu ficha.</p>
+    <p>Al revisar tu postulación a AMAGRO AG, estos datos necesitan una corrección. Escribe cómo deben quedar: te avisamos de inmediato si algo no calza. El equipo los revisará antes de actualizar tu ficha.</p>
     <div id="campos"></div>
     <div class="privacidad">Solo te pedimos lo que aparece arriba. <b>Nunca te pediremos claves ni pagos por este medio.</b></div>
     <div class="error" id="error" role="alert" hidden></div>
@@ -62,6 +67,7 @@
   </div>
 </main>
 <script src="config.js"></script>
+<script src="validar.js"></script>
 <script src="datos.js"></script>
 </body>
 </html>
