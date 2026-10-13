@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'">
+<title>AMAGRO AG · Confirma tus datos</title>
+<style>
+  :root { --verde:#3f8f3a; --fondo:#f6f8f5; --borde:#dfe5dc; --texto:#1f2a1f; --suave:#5b675b; --error:#b3261e; --error-bg:#fdecea; --ok-bg:#e8f5e6; --tarjeta:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fondo:#141a14; --borde:#2f3a2f; --texto:#e8efe6; --suave:#a3b0a1; --error:#ff8a80; --error-bg:#3a1c1a; --ok-bg:#1d3320; --tarjeta:#1d251d; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.5 system-ui,sans-serif; background:var(--fondo); color:var(--texto); }
+  main { max-width:560px; margin:0 auto; padding:20px 16px 40px; }
+  .logo { display:flex; align-items:center; gap:12px; margin:8px 0 18px; }
+  .logo img { height:56px; width:auto; }
+  .logo b { color:var(--verde); font-size:20px; }
+  .tarjeta { background:var(--tarjeta); border:1px solid var(--borde); border-top:4px solid var(--verde); border-radius:12px; padding:20px; }
+  h1 { font-size:21px; margin:0 0 8px; }
+  p { margin:0 0 12px; }
+  .campo { margin-top:16px; }
+  label { display:block; font-weight:700; margin-bottom:2px; }
+  .ayuda { color:var(--suave); font-size:14px; margin:0 0 6px; }
+  input, select { width:100%; padding:11px 12px; font:inherit; color:inherit; background:transparent; border:1px solid var(--borde); border-radius:10px; }
+  input:focus, select:focus { outline:2px solid var(--verde); outline-offset:1px; }
+  button { width:100%; margin-top:22px; padding:14px; font:inherit; font-weight:700; color:#fff; background:var(--verde); border:0; border-radius:10px; cursor:pointer; }
+  button:disabled { opacity:.55; cursor:wait; }
+  .error { background:var(--error-bg); color:var(--error); border-radius:8px; padding:10px 12px; margin-top:16px; font-size:15px; }
+  .exito { background:var(--ok-bg); border-radius:10px; padding:16px; }
+  .privacidad { margin-top:18px; padding:12px 14px; border-radius:8px; background:var(--fondo); font-size:14px; color:var(--suave); }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo"><img src="logo.png" alt="" width="60" height="56"><b>AMAGRO AG</b></div>
+
+  <div class="tarjeta" id="cargando"><p>Comprobando tu enlace…</p></div>
+
+  <div class="tarjeta" id="invalido" hidden>
+    <h1>Este enlace no se puede usar</h1>
+    <p id="invalidoTexto">Abre el enlace completo que te enviamos por correo. Si ya enviaste tus datos o el enlace venció, pide uno nuevo a AMAGRO.</p>
+  </div>
+
+  <form class="tarjeta" id="formulario" hidden novalidate>
+    <h1>Confirma tus datos</h1>
+    <p>Al revisar tu postulación a AMAGRO AG, estos datos necesitan una corrección. Escribe cómo deben quedar; el equipo los revisará antes de actualizar tu ficha.</p>
+    <div id="campos"></div>
+    <div class="privacidad">Solo te pedimos lo que aparece arriba. <b>Nunca te pediremos claves ni pagos por este medio.</b></div>
+    <div class="error" id="error" role="alert" hidden></div>
+    <button type="submit" id="enviar">Enviar mis datos</button>
+  </form>
+
+  <div class="tarjeta" id="listo" hidden>
+    <div class="exito">
+      <h1>¡Gracias! Recibimos tus datos</h1>
+      <p>El equipo de AMAGRO los revisará y actualizará tu ficha. Ya puedes cerrar esta página.</p>
+    </div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="datos.js"></script>
+</body>
+</html>
