@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https://*.supabase.co; base-uri 'none'; form-action 'none'">
+<title>AMAGRO AG · Tu carta de bienvenida</title>
+<style>
+  :root { --verde:#3f8f3a; --fondo:#f6f8f5; --borde:#dfe5dc; --texto:#1f2a1f; --suave:#5b675b; --error:#b3261e; --error-bg:#fdecea; --ok-bg:#e8f5e6; --tarjeta:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fondo:#141a14; --borde:#2f3a2f; --texto:#e8efe6; --suave:#a3b0a1; --error:#ff8a80; --error-bg:#3a1c1a; --ok-bg:#1d3320; --tarjeta:#1d251d; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:16px/1.5 system-ui,sans-serif; background:var(--fondo); color:var(--texto); }
+  main { max-width:560px; margin:0 auto; padding:20px 16px 40px; }
+  .logo { display:flex; align-items:center; gap:12px; margin:8px 0 18px; }
+  .logo img { height:56px; width:auto; }
+  .logo b { color:var(--verde); font-size:20px; }
+  .tarjeta { background:var(--tarjeta); border:1px solid var(--borde); border-top:4px solid var(--verde); border-radius:12px; padding:20px; margin-bottom:14px; }
+  h1 { font-size:21px; margin:0 0 8px; }
+  h2 { font-size:16px; margin:0 0 6px; }
+  p { margin:0 0 12px; }
+  .boton { display:block; width:100%; margin-top:12px; padding:14px; font:inherit; font-weight:700; text-align:center; text-decoration:none; color:#fff; background:var(--verde); border:0; border-radius:10px; cursor:pointer; }
+  .boton.sec { color:var(--verde); background:transparent; border:2px solid var(--verde); }
+  .boton:disabled { opacity:.55; cursor:wait; }
+  .error { background:var(--error-bg); color:var(--error); border-radius:8px; padding:10px 12px; margin-top:12px; font-size:15px; }
+  ul { margin:0; padding-left:20px; }
+  li { margin:0 0 6px; }
+  a { color:var(--verde); }
+  .suave { color:var(--suave); font-size:14px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo"><img src="logo.png" alt="" width="60" height="56"><b>AMAGRO AG</b></div>
+
+  <div class="tarjeta" id="cargando"><p>Preparando tu carta…</p></div>
+
+  <div class="tarjeta" id="invalido" hidden>
+    <h1>Este enlace no se puede usar</h1>
+    <p id="invalidoTexto">Abre el enlace completo que te enviamos por correo. Si el enlace venció, escríbenos a <a href="mailto:socias@amagroag.cl">socias@amagroag.cl</a> y te enviamos uno nuevo.</p>
+  </div>
+
+  <div id="listo" hidden>
+    <div class="tarjeta">
+      <h1>¡Bienvenida a AMAGRO AG!</h1>
+      <p>Tu carta de bienvenida está lista.</p>
+      <a class="boton" id="ver" href="#" target="_blank" rel="noopener">Ver mi carta</a>
+      <button class="boton sec" id="descargar" type="button">Descargar mi carta (PDF)</button>
+      <div class="error" id="error" role="alert" hidden></div>
+    </div>
+    <div class="tarjeta">
+      <h2>Nuestros Estatutos</h2>
+      <ul>
+        <li><a href="resumen-estatutos-amagro-ag.pdf">Resumen de los Estatutos</a></li>
+        <li><a href="estatutos-lectura-amagro-ag.pdf">Estatutos completos (versión de lectura)</a></li>
+        <li><a href="estatutos-amagro-ag.pdf">Copia notarial (escaneada), el documento oficial</a></li>
+      </ul>
+      <p class="suave" style="margin-top:12px">Para cualquier consulta, escríbenos a <a href="mailto:socias@amagroag.cl">socias@amagroag.cl</a>.</p>
+    </div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="bienvenida.js"></script>
+</body>
+</html>
